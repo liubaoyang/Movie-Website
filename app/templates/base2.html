@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="{{ url_for('static',filename="jquery-3.3.1.js") }}"></script>
+{#    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_716483_nep1fslj2ld.css">#}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename="font-awesome-4.7.0/css/font-awesome.css") }}">
+
+     <link rel="stylesheet" media="screen" href="{{ url_for('static',filename="bootstrap-3.3.7-dist/css/bootstrap.css") }}">
+{#    <style type="text/css">@import "base1.css";</style>#}
+    {% block head %}
+    {% endblock %}
+    <style>
+        {% block style %}
+        {% endblock %}
+         *{
+            margin: 0;
+            padding: 0;
+        }
+        .daohang{
+            height: 70px;
+            line-height: 70px;
+            width: 100%;
+            border-bottom:solid 2px grey;
+            box-shadow: 1px 2px 5px grey;
+        }
+        .movie_png{
+            margin-left:400px;
+            vertical-align: middle;
+        }
+        .movie_small{
+            display: inline-block;
+            vertical-align: middle;
+            font-size:25px;
+        }
+        .form1{
+            display: inline-block;
+        }
+
+
+        #form1_p{
+            vertical-align: middle;
+            display: inline-block;
+            border: 1px solid grey;
+            border-radius: 0;
+            border-left: none;
+            height: 31px;
+            line-height: 31px;
+            width: 70px;
+            background-color: white;
+        }
+        #button_base_1{
+            {#margin-top: 10px;#}
+            margin-left: 110px;
+            display: inline-block;
+            vertical-align: middle;
+            border-radius: 0;
+            border: 1px solid grey;
+            height: 31px;
+            width: 300px;
+        }
+        .daohang_ul{
+            display: inline-block;
+            margin-left: 200px;
+        }
+        li{
+            display: inline-block;
+        }
+        a{
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body style="padding-top: 72px">
+    <div class="daohang" style="position: fixed;top:0;z-index: 1000;background: white">
+{#       <i class="fa fa-times fa-fw" style="display: inline-block;"></i>#}
+{#       <i class="icon"></i>#}
+       <img class="movie_png" style="height: 40px" src="{{ url_for('static',filename="电影.png") }}">
+       <span class="movie_small">微电影</span>
+       <form class="form1" action="/search_choose" method="POST">
+           <input id="button_base_1" type="text"  value="请输入电影名!" name="name"><button id="form1_p" type="submit"><i class="fa fa-search" style="display: inline-block;"></i><span>搜索</span></button>
+           <input type="hidden" name="csrf_token" value="{{csrf_token()}}">
+       </form>
+        <ul class="daohang_ul" >
+            <i class="fa fa-film " ></i>
+            <li><a  href="/movie" style="font-size: 16px">电影</a></li>
+        </ul>
+       <ul class="daohang_ul" style="margin-left: 50px">
+            <i class="fa fa-sign-in" aria-hidden="true"></i>
+           <li><a  href="/login" style="font-size: 16px">登录</a></li>
+       </ul>
+       <ul class="daohang_ul" style="margin-left: 50px">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+            <li><a href="/register" style="font-size: 16px">注册</a></li>
+        </ul>
+       <ul class="daohang_ul" style="margin-left: 50px">
+            <i class="fa fa-sign-out" aria-hidden="true"></i>
+            <li style="font-size: 16px">退出</li>
+        </ul>
+       <ul class="daohang_ul2" style="margin-left: 50px;display: inline-block">
+            <img class="movie_png" style="height: 17px;margin:0;display: inline-block" src="{{ url_for('static',filename="会员.png") }}">
+            <li><a href="/huiyuan_usr" style="font-size: 16px">会员</a></li>
+       </ul>
+   </div>
+    {% block body %}
+    {% endblock %}
+
+    {#    <i class="fa fa-times fa-fw" style="display: inline-block;"></i>#}
+    {#    <img src="{{ url_for('static',filename="girl.jpg") }}">#}
+    <script>
+        {#$("#form1_p").click(function () {#}
+        {#    $("#button_base_1").val("请输入电影名!" )#}
+        {#    })#}
+        $("#button_base_1").focus(function () {
+            if ($("#button_base_1").val() == "请输入电影名!")
+                $("#button_base_1").val("")
+        })
+
+        $("#button_base_1").blur(function () {
+            if ($("#button_base_1").val() == "")
+                $("#button_base_1").val("请输入电影名!" )
+        })
+
+        {% block JS %}
+        {% endblock %}
+    </script>
+</body>
+</html>

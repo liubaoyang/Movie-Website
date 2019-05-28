@@ -1,0 +1,214 @@
+{% extends "base1.html" %}
+
+{% block style %}
+    .register_1{
+        margin-left:750px;
+{#        position:fixed;#}
+{#        left:0;#}
+{#        right:0;#}
+        margin-top:30px;
+        height:800px;
+        width:380px;
+        border:1px solid dodgerblue;
+    }
+    .register_p1{
+        height:50px;
+        line-height:50px;
+        background-color: dodgerblue;
+    }
+    .register_input_1{
+        margin-top:15px;
+        margin-left:35px;
+        border-radius: 0;
+        border: 1px solid grey;
+        height: 30px;
+        width:310px;
+    }
+    li{
+        display: inline-block;
+        }
+
+{% endblock %}
+{% block body %}
+    <div class="register_1">
+        <p class="register_p1">
+            <i style="display: inline-block;vertical-align: middle;margin-left:35px;" class="fa fa-plus" ></i>
+            <span style="display: inline-block;vertical-align: middle;">会员注册</span>
+        </p>
+        <form action="/register" method="POST" enctype="multipart/form-data">
+            <ul style="padding-left: 35px;margin-top: 15px;">
+                <img class="movie_png" style="height: 17px;margin:0;display: inline-block" src="{{ url_for('static',filename="会员.png") }}">
+                <li>用户名<span class="register_err_name " style="color: red;font-size: 10px">{{ name }}</span></li>
+            </ul>
+            <input class="register_input_1" id="register_name" type="text" name="usrname" value="用户名">
+            <ul>
+                <i style="margin-top: 15px;margin-left: 35px" class="fa fa-lock" aria-hidden="true"></i>
+                <li>密码<span class="register_err_pwd_1 " style="color: red;font-size: 10px">{{ pwd1 }}</span></li>
+            </ul>
+            <input class="register_input_1" id="register_pwd" type="text" name="pwd" value="密码">
+            <ul>
+                <i style="margin-top: 15px;margin-left: 35px" class="fa fa-lock" aria-hidden="true"></i>
+                <li>确认密码<span class="register_err_pwd" style="color: red">{{ password }}</span></li>
+            </ul>
+            <input class="register_input_1" id="register_pwd2" type="text" name="pwd2" value="确认密码">
+             <ul style="padding-left: 35px;margin-top: 15px;">
+                <img class="movie_png" style="height: 17px;margin:0;display: inline-block" src="{{ url_for('static',filename="会员.png") }}">
+                <li>昵称</li>
+            </ul>
+            <input class="register_input_1" id="register_dearname" type="text" name="dearname" value="昵称">
+            <ul>
+                <i style="margin-top: 15px;margin-left:35px" class="fa fa-envelope" aria-hidden="true"></i>
+                <li>邮箱<span class="register_email_err" style="color: red">{{ email }}</span></li>
+            </ul>
+            <input class="register_input_1" id="register_email" type="text" name="email" value="邮箱">
+            <ul>
+                <i style="margin-top: 15px;margin-left: 35px" class="fa fa-mobile" aria-hidden="true"></i>
+                <li>手机<span class="register_err_phone" style="color: red">{{ phone }}</span></li>
+            </ul>
+            <input class="register_input_1" id="register_phone" type="text" name="tel" value="手机号码">
+            <ul>
+                <i style="margin-top: 15px;margin-left:35px" class="fa fa-smile-o" aria-hidden="true"></i>
+                <li>头像*</li>
+            </ul>
+            <input class="register_input_1"  type="file" name="usrimg" value="头像">
+            <ul>
+                <i style="margin-top: 15px;margin-left:35px" class="fa fa-info" aria-hidden="true"></i>
+                <li>简介*</li>
+            </ul>
+{#            <textarea cols="2" rows="2"></textarea>#}
+            <input class="register_input_1" id="register_perintro" type="area" name="intro" value="个人简介">
+            <input class="register_input_1" id="register_sub" style="background-color: lime;height: 40px;font-size: 22px;margin-top: 30px" type="submit" value="注册">
+            <input type="hidden" name="csrf_token" value="{{csrf_token()}}">
+        </form>
+    </div>
+{% endblock %}
+{% block JS %}
+    var a_val;
+    $("#register_name").focus(function () {
+            $(".register_err_name").text("")
+            a_val=$("#register_name").val()
+            if (a_val=="用户名")
+                {$("#register_name").val("")}
+        })
+    $("#register_name").blur(function () {
+        if ($("#register_name").val()==""){
+            $("#register_name").val("用户名")}
+        })
+    $("#register_pwd").focus(function () {
+        $(".register_err_pwd_1 ").text("")
+        a_val=$("#register_pwd").val()
+        if (a_val=="密码")
+            {$("#register_pwd").val("")}
+        })
+    $("#register_pwd").blur(function () {
+        if ($("#register_pwd").val()==""){
+            $("#register_pwd").val("密码")}
+        })
+    $("#register_pwd2").focus(function () {
+        $(".register_err_pwd ").text("")
+        a_val=$("#register_pwd2").val()
+        if (a_val=="确认密码")
+            {$("#register_pwd2").val("")}
+        })
+    $("#register_pwd2").blur(function () {
+        if ($("#register_pwd2").val()==""){
+            $("#register_pwd2").val("确认密码")}
+        })
+    $("#register_email").focus(function () {
+        $(".register_email_err ").text("")
+        a_val=$("#register_email").val()
+        if (a_val=="邮箱")
+            {$("#register_email").val("")}
+        })
+    $("#register_email").blur(function () {
+        if ($("#register_email").val()==""){
+            $("#register_email").val("邮箱")}
+        })
+    $("#register_phone").focus(function () {
+        $(".register_err_phone ").text("")
+        a_val=$("#register_phone").val()
+        if (a_val=="手机号码")
+            {$("#register_phone").val("")}
+        })
+    $("#register_phone").blur(function () {
+        if ($("#register_phone").val()==""){
+            $("#register_phone").val("手机号码")}
+        })
+    $("#register_dearname").focus(function () {
+        a_val=$("#register_dearname").val()
+        if (a_val=="昵称")
+            {$("#register_dearname").val("")}
+        })
+    $("#register_dearname").blur(function () {
+        if ($("#register_dearname").val()==""){
+            $("#register_dearname").val("昵称")}
+        })
+    $("#register_perintro").focus(function () {
+        a_val=$("#register_perintro").val()
+        if (a_val=="个人简介")
+            {$("#register_perintro").val("")}
+        })
+    $("#register_perintro").blur(function () {
+        if ($("#register_perintro").val()==""){
+            $("#register_perintro").val("个人简介")}
+        })
+
+
+
+
+{#    $("input").focus(function () {#}
+{#            a_val=$(this).val()#}
+{#            $(this).val("")#}
+{##}
+{#        })#}
+{#    $("input").blur(function () {#}
+{#            if ($(this).val()==""){#}
+{#                $(this).val(a_val)}#}
+{#        })#}
+
+    $("#register_sub").click(function (event) {
+        password = $("#register_pwd").val()
+        password2 = $("#register_pwd2").val()
+        email = $("#register_email").val()
+
+        console.log(password, password2, email)
+        if (password != password2) {
+            $(".register_err_pwd").text("  两次密码不一致！")
+            event.preventDefault()
+        }
+
+        var usr=document.getElementsByName("usrname")[0];
+        var patt=/^[a-z]\w{3,19}$/i;
+        if (usr.value.search(patt)<0)
+            {
+                $(".register_err_name").text("用户名是由4—20位字母/数字或下划线组成，数字不能开头")
+                event.preventDefault()
+            }
+
+        var pwd=document.getElementById("register_pwd");
+        var patt=/^[\S]{4,16}$/;
+        if (pwd.value.search(patt)<0)
+            {
+                $(".register_err_pwd_1").text("密码是由6-16位有效字符组成（非空白字符)")
+                event.preventDefault()
+            }
+
+        var email=document.getElementById("register_email");
+        var patt=/^[\w]{1,20}@[a-z0-9]{1,3}(.com)$/i;
+        if (email.value.search(patt)<0)
+            {
+                $(".register_email_err").text("邮箱格式错误")
+                event.preventDefault()
+            }
+
+        var phone=document.getElementById("register_phone");
+        var patt=/^1[3456789][0-9]{9}$/;
+        if (phone.value.search(patt)<0)
+            {
+                $(".register_err_phone").text("手机号码格式错误")
+                event.preventDefault()
+            }
+    })
+
+
+{% endblock %}

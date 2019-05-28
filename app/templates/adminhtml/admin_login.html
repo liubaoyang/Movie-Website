@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="{{ url_for('static',filename="jquery-3.3.1.js") }}"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename="font-awesome-4.7.0/css/font-awesome.css") }}">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .login_1{
+        margin-left:750px;
+{#        position:fixed;#}
+{#        left:0;#}
+{#        right:0;#}
+        margin-top:200px;
+        height:320px;
+        width:350px;
+        border:1px solid gold;
+    }
+    .login_p1{
+        height:50px;
+        line-height:50px;
+        background-color: gold;
+    }
+    .login_input_1{
+        margin-top:20px;
+        margin-left:20px;
+        border-radius: 0;
+        border: 1px solid gold;
+        height: 30px;
+        width:310px;
+    }
+    li{
+        display: inline-block;
+        }
+
+    </style>
+</head>
+<body>
+    <div style="height: 60px;width: 100%;background-color: #00a0e9">
+    </div>
+   <div class="login_1">
+        <p class="login_p1">
+            <i  style="display: inline-block;vertical-align: middle;margin-left:20px;" class="fa fa-sign-in fa-2x"></i>
+            <span style="display: inline-block;vertical-align: middle;">管理员登录</span>
+        </p>
+        <form action="/admin_login" method="POST">
+            <ul style="padding-left: 20px;margin-top: 20px;">
+                <img class="movie_png" style="height: 17px;margin:0;display: inline-block" src="{{ url_for('static',filename="会员.png") }}">
+                <li>管理员<span class="login_nameerr" style="color: red">{{ login_inputname }}</span></li>
+            </ul>
+            <input class="login_input_1" id="login_name" type="text" name="name" placeholder="用户名/邮箱/手机号码">
+            <ul>
+                <i style="margin-top: 20px;margin-left: 20px" class="fa fa-lock" aria-hidden="true"></i>
+                <li>密码<span class="login_pwderr" style="color: red">{{ login_inputpwd }}</span></li>
+            </ul>
+            <input class="login_input_1" id="login_pwd" type="password" name="pwd" placeholder="密码">
+            <input class="login_input_1" id="login_sub" style="background-color: gold;height: 40px;font-size: 22px" type="submit" value="登录">
+            <input type="hidden" name="csrf_token" value="{{csrf_token()}}">
+        </form>
+    </div>
+<script>
+    $("#login_name").focus(function () {
+            $(".login_nameerr").text("")
+        })
+
+    $("#login_pwd").focus(function () {
+            $("#login_pwd").val("")
+            $(".login_pwderr").text("")
+        })
+</script>
+</body>
+</html>
